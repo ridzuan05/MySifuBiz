@@ -7,7 +7,6 @@ isort
 pytest
 tiktoken
 pytest-asyncio
-sqlite3
 chromadb
 streamlit
 streamlit-chat
