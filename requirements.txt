@@ -8,3 +8,5 @@ pytest>=7.3.2
 chromadb>=0.3.29
 tiktoken>=0.4.0
 pytest-asyncio
+streamlit
+streamlit-chat
