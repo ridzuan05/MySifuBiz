@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+import streamlit as st
 
 from langchain.chat_models import ChatOpenAI
 
@@ -47,7 +48,7 @@ if __name__ == "__main__":
                 llm,
                 use_tools=USE_TOOLS,
                 product_catalog="examples/sample_product_catalog.txt",
-                salesperson_name="Ted Lasso",
+                salesperson_name="MySifu",
                 verbose=verbose,
             )
         else:
@@ -55,23 +56,24 @@ if __name__ == "__main__":
     else:
         with open(config_path, "r", encoding="UTF-8") as f:
             config = json.load(f)
-        print(f"Agent config {config}")
+        # print
+        st.write((f"Agent config {config}")
         sales_agent = SalesGPT.from_llm(llm, verbose=verbose, **config)
 
     sales_agent.seed_agent()
-    print("=" * 10)
+    st.write("=" * 10)
     cnt = 0
     while cnt != max_num_turns:
         cnt += 1
         if cnt == max_num_turns:
-            print("Maximum number of turns reached - ending the conversation.")
+            st.write("Maximum number of turns reached - ending the conversation.")
             break
         sales_agent.step()
 
         # end conversation
         if "<END_OF_CALL>" in sales_agent.conversation_history[-1]:
-            print("Sales Agent determined it is time to end the conversation.")
+            st.write("Sales Agent determined it is time to end the conversation.")
             break
-        human_input = input("Your response: ")
+        human_input = st.text_input("Your response: ")
         sales_agent.human_step(human_input)
-        print("=" * 10)
+        st.write("=" * 10)
