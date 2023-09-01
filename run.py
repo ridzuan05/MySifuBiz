@@ -56,8 +56,7 @@ if __name__ == "__main__":
     else:
         with open(config_path, "r", encoding="UTF-8") as f:
             config = json.load(f)
-            # print
-            st.write((f"Agent config {config}")
+            st.write(f"Agent config {config}")
             sales_agent = SalesGPT.from_llm(llm, verbose=verbose, **config)
 
     sales_agent.seed_agent()
