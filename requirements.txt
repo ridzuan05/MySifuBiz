@@ -8,6 +8,7 @@ isort
 pytest
 tiktoken
 pytest-asyncio
+pysqlite3-binary
 chromadb
 streamlit
 streamlit-chat
